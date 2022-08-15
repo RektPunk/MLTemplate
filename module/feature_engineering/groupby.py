@@ -24,10 +24,9 @@ def groupby_feature(
             {
                 f"{target_col}_{category_col}_{func_key}": df.groupby(category_col)[
                     target_col
-                ].transform(func_item)
+                ].apply(func_item)
                 for target_col in target_cols
                 for category_col in category_cols
             }
         )
-    df = df.assign(**df_groupby_dict)
-    return df, list(df_groupby_dict.keys())
+    return df_groupby_dict, list(df_groupby_dict.keys())
