@@ -27,7 +27,7 @@ train_df.columns = normalize_list(train_df.columns)
 test_df.columns = normalize_list(test_df.columns)
 
 category_cols = []
-target_cols = ["prodtaken"]
+target_cols = ["y"]
 
 label_map = create_label_map(train_df)
 train_df = transform_categorical_cols(train_df, label_map)
