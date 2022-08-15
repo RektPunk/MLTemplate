@@ -1,6 +1,7 @@
 import lightgbm as lgb
 import pandas as pd
 import numpy as np
+import sklearn
 
 
 def optuna_objective(
@@ -25,8 +26,8 @@ def optuna_objective(
     """
     dtrain = lgb.Dataset(data=train_x, label=train_y)
     param = {
-        "objective": "rmse",
-        "metric": "rmse",
+        "objective": "binary",  # e.g. "rmse" for regression
+        "metric": "binary_logloss",  # e.g. "rmse" for regression
         "verbosity": -1,
         "boosting_type": "gbdt",
         "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
@@ -40,5 +41,12 @@ def optuna_objective(
 
     gbm = lgb.train(param, dtrain)
     preds = gbm.predict(valid_x)
-    rmse = np.sqrt(np.mean((valid_y - preds) ** 2))
-    return rmse
+
+    ## binary classification
+    pred_labels = np.rint(preds)
+    accuracy = sklearn.metrics.accuracy_score(valid_y, pred_labels)
+
+    ## regression
+    # rmse = np.sqrt(np.mean((valid_y - preds) ** 2))
+
+    return accuracy
