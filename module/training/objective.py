@@ -38,13 +38,10 @@ def optuna_classification_objective(
         "bagging_freq": trial.suggest_int("bagging_freq", 1, 7),
         "min_child_samples": trial.suggest_int("min_child_samples", 5, 100),
     }
-
     gbm = lgb.train(param, dtrain)
     preds = gbm.predict(valid_x)
-
     pred_labels = np.rint(preds)
     log_loss = sklearn.metrics.log_loss(valid_y, pred_labels)
-
     return log_loss
 
 
@@ -82,10 +79,7 @@ def optuna_regression_objective(
         "bagging_freq": trial.suggest_int("bagging_freq", 1, 7),
         "min_child_samples": trial.suggest_int("min_child_samples", 5, 100),
     }
-
     gbm = lgb.train(param, dtrain)
     preds = gbm.predict(valid_x)
-
     rmse = np.sqrt(np.mean((valid_y - preds) ** 2))
-
     return rmse
