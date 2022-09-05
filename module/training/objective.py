@@ -26,8 +26,8 @@ def optuna_classification_objective(
     """
     dtrain = lgb.Dataset(data=train_x, label=train_y)
     param = {
-        "objective": "binary",  # e.g. "rmse" for regression
-        "metric": "binary",  # e.g. "rmse" for regression
+        "objective": "binary",
+        "metric": "binary",
         "verbosity": -1,
         "boosting_type": "gbdt",
         "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
@@ -67,8 +67,8 @@ def optuna_regression_objective(
     """
     dtrain = lgb.Dataset(data=train_x, label=train_y)
     param = {
-        "objective": "rmse",  # e.g. "rmse" for regression
-        "metric": "rmse",  # e.g. "rmse" for regression
+        "objective": "rmse",
+        "metric": "rmse",
         "verbosity": -1,
         "boosting_type": "gbdt",
         "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
