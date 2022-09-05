@@ -1,2 +1,2 @@
-from models.baseline_classification.model import BaselineClassificationModel
-from models.baseline_regression.model import BaselineRegressionModel
+from models.classification.model import BaselineClassificationModel
+from models.regression.model import BaselineRegressionModel

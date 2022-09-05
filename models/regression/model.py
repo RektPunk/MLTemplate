@@ -1,9 +1,9 @@
 from typing import Any, Dict, Callable
 import pandas as pd
-from models.baseline_regression.load_data import load_data
-from models.baseline_regression.feature_engineering import feature_engineering
-from models.baseline_regression.training import training
-from models.baseline_regression.prediction import prediction
+from models.regression.load_data import load_data
+from models.regression.feature_engineering import feature_engineering
+from models.regression.training import training
+from models.regression.prediction import prediction
 
 
 class BaselineRegressionModel:
